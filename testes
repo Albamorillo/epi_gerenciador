@@ -1,0 +1,12 @@
+def equipamentos_criar(request):
+    if request.method == 'POST':
+        form = EquipamentoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Equipamento cadastrado com sucesso!')
+            return redirect('equipamentos_criar')
+        else:
+            messages.error(request, 'Erro ao cadastrar equipamento. Verifique os dados.')
+    else:
+        form = EquipamentoForm()
+    return render(request, 'equipamentos_form.html', {'form': form})
